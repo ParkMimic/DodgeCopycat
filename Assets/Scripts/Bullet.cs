@@ -7,7 +7,7 @@ public class Bullet : MonoBehaviour
     void Start()
     {
         rigid = GetComponent<Rigidbody>();
-        rigid.linearVelocity = Vector3.forward * speed;
+        rigid.linearVelocity = transform.forward * speed;
 
         Destroy(gameObject, 3f);
     }

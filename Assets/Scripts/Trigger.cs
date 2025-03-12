@@ -36,8 +36,6 @@ public class Trigger : MonoBehaviour
                 isClosing = true;
             }
 
-            GameObject gameObject = FindAnyObjectByType<GameManager>();
-
             Destroy(gameObject, 1.5f);
         }
     }
