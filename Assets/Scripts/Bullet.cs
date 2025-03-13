@@ -23,5 +23,10 @@ public class Bullet : MonoBehaviour
                 playerController.Die();
             }
         }
+
+        if (other.tag == "Wall")
+        {
+            Destroy(gameObject);
+        }
     }
 }
