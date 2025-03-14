@@ -4,46 +4,53 @@ using UnityEngine;
 public class LaserTrap : MonoBehaviour
 {
     private float trapPosition;
-    private float trapLate;
-    private int keyCheck;
-    private float countDown;
+    private float trapLate = 0;
+    private bool trigged = true;
 
-    public GameObject laserTrap;
     public float rotateSpeed = 35f;
+
+    public GameObject laser1;
+    public GameObject laser2;
+
+    public GameObject trigger1;
+    public GameObject trigger2;
 
     private void Start()
     {
         trapPosition = transform.position.y + 1.5f;
+        laser1.SetActive(false);
+        laser2.SetActive(false);
     }
 
     void Update()
     {
-        if (keyCheck >= 1)
-        {
-            countDown += Time.deltaTime;
-
-            if (countDown >= 11)
-            {
-                laserTrap.SetActive(true);
-                countDown = 0;
-            }
-        }
-
-        if (transform.position.y <= trapPosition)
-        {
-            transform.Translate(0, 10 * Time.deltaTime, 0);
-        }
-
         trapLate += Time.deltaTime;
 
-        if (trapLate >= 1.5f)
+        if (trapLate >= 10)
         {
-            transform.Rotate(0, (rotateSpeed * keyCheck) * Time.deltaTime, 0);
-        }
-    }
+            laser1.SetActive(true);
+            laser2.SetActive(true);
 
-    public void Key()
-    {
-        keyCheck += 1;
+            if (transform.position.y <= trapPosition)
+            {
+                transform.Translate(0, 10 * Time.deltaTime, 0);
+            }
+
+            if (trapLate >= 11.5f)
+            {
+                transform.Rotate(0, rotateSpeed * Time.deltaTime, 0);
+            }
+
+            if (trigger1 == null && trigger2 == null)
+            {
+                if (trigged == true)
+                {
+                    rotateSpeed *= 2;
+                    trigged = false;
+                }
+
+                Debug.Log("1rotateSpeed : " + rotateSpeed);
+            }
+        }
     }
 }

@@ -1068,6 +1068,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   door: {fileID: 2093679787}
   trapObject: {fileID: 1744747825}
+  laserTrap: {fileID: 1461431179}
 --- !u!135 &396447904
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -1446,6 +1447,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   door: {fileID: 1359065179}
   trapObject: {fileID: 91388208}
+  laserTrap: {fileID: 1461431179}
 --- !u!135 &660932132
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -3491,8 +3493,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20eefecda853e8440b8560ca66ea8ddb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  laserTrap: {fileID: 1461431179}
-  rotateSpeed: 35
+  rotateSpeed: 45
+  laser1: {fileID: 1161274821}
+  laser2: {fileID: 1049483711}
+  trigger1: {fileID: 660932129}
+  trigger2: {fileID: 396447901}
 --- !u!1 &1463846811
 GameObject:
   m_ObjectHideFlags: 0
