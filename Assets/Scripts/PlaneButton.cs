@@ -1,23 +1,20 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlaneButton : MonoBehaviour
 {
-    public GameObject key1;
-    public GameObject key2;
+    public GameObject laserTrap;
 
     private int keyCount;
-
-    void Update()
-    {
-        if (keyCount == 2)
-        {
-            GetComponent<Renderer>().material.color = Color.yellow;
-        }
-    }
 
     public void key()
     {
         keyCount += 1;
+
+        if (keyCount == 2)
+        {
+            GetComponent<Renderer>().material.color = Color.yellow;
+        }
     }
 
     private void OnTriggerEnter(Collider other)

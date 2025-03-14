@@ -19,22 +19,25 @@ public class GameManager : MonoBehaviour
     private bool isGameover;
     private bool isGameclear;
     private bool doorOpen = false;
-    
+
     void Start()
     {
-        surviveTime = 0f;
+        surviveTime = 0;
         isGameover = false;
         isGameclear = false;
+
+        float bestTime = PlayerPrefs.GetFloat("BestTime", float.MaxValue);
     }
 
     void Update()
     {
-        if (!isGameover)
+        if (!isGameover || !isGameclear)
         {
             surviveTime += Time.deltaTime;
             timeText.text = "Record Time: " + (int)surviveTime;
         }
-        else if (isGameover || isGameclear)
+
+        if (isGameover || isGameclear)
         {
             if (Input.GetKeyDown(KeyCode.R))
             {
@@ -42,7 +45,7 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        if (doorOpen == true)
+        if (doorOpen)
         {
             if (door1.transform.position.x < 8f)
             {
@@ -53,6 +56,11 @@ public class GameManager : MonoBehaviour
             {
                 door2.transform.Translate(-10f * Time.deltaTime, 0, 0);
             }
+        }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Application.Quit();
         }
     }
 
@@ -76,13 +84,14 @@ public class GameManager : MonoBehaviour
         recordTime.SetActive(false);
         gameclearText.SetActive(true);
 
-        float bestScore = PlayerPrefs.GetFloat("BestScore");
+        float bestScore = PlayerPrefs.GetFloat("BestScore", float.MaxValue);
+
         if (surviveTime < bestScore)
         {
-            bestScore = surviveTime;
-            PlayerPrefs.SetFloat("BestScore", bestScore);
+            PlayerPrefs.SetFloat("BestScore", surviveTime);
+            PlayerPrefs.Save();
         }
 
-        BestRecord.text = "Your Best Record\n" + (int)bestScore + " Sec";
+        BestRecord.text = "Your Best Record\n" + (int)PlayerPrefs.GetFloat("BestScore", float.MaxValue);
     }
 }

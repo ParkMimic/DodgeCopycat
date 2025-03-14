@@ -1,5 +1,5 @@
-using UnityEditor.Build.Content;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class Trigger : MonoBehaviour
 {
@@ -8,8 +8,9 @@ public class Trigger : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == ("Player"))
+        if (other.CompareTag("Player")) // CompareTag를 사용하는 것이 더 효율적이야
         {
+            // door와 trapObject가 null이 아닌지 확인
             if (door != null)
             {
                 door.SetActive(true);
@@ -20,10 +21,20 @@ public class Trigger : MonoBehaviour
                 trapObject.SetActive(true);
             }
 
+            // PlaneButton 객체 찾기
             PlaneButton planeButton = FindAnyObjectByType<PlaneButton>();
-            planeButton.key();
+            if (planeButton != null)
+            {
+                planeButton.key();
+            }
 
-            Destroy(gameObject);
+            LaserTrap laserTrap = FindAnyObjectByType<LaserTrap>();
+            if (laserTrap != null)
+            {
+                laserTrap.Key();
+            }
+
+            Destroy(gameObject); // 트리거 오브젝트 제거
         }
     }
 }

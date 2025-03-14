@@ -1,3 +1,4 @@
+using System.Threading;
 using UnityEngine;
 
 public class BulletSpawner : MonoBehaviour
@@ -16,13 +17,13 @@ public class BulletSpawner : MonoBehaviour
         timeSpawnRate = 0; // 경과 시간 초기화
         spawnRate = Random.Range(1f, 2f); // 첫 번째 총알은 1초 후 발사
         target = FindAnyObjectByType<PlayerController>().transform; // 대상이 될 타겟 플레이어 오브젝트를 찾아 지정
-
-        Destroy(gameObject, 10f);
     }
 
     void Update()
     {
         timeSpawnRate += Time.deltaTime; // 경과 시간 갱신
+
+            Destroy(gameObject, 10f);
 
         if (timeSpawnRate >= spawnRate) // 만약 경과 시간이 총알 생성 주기보다 크다면
         {
